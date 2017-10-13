@@ -1,8 +1,3 @@
-# lua-lluv-pegasus
-Simple server based on pegasus.lua 
-
-
-```Lua
 local uv      = require "lluv"
 local Pegasus = require "lluv.pegasus"
 
@@ -15,4 +10,3 @@ server:startAsync(function(request, response)
 end)
 
 uv.run()
-```
