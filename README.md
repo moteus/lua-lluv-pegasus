@@ -1,5 +1,5 @@
 # lua-lluv-pegasus
-Simple server based on pegasus.lua 
+Simple server based on [pegasus.lua][http://evandrolg.github.io/pegasus.lua] library
 
 
 ```Lua
