@@ -19,6 +19,7 @@ dependencies = {
   "lua >= 5.1, < 5.4",
   "pegasus > 0.9.2",
   "lluv",
+  "path",
 }
 
 build = {
@@ -27,6 +28,7 @@ build = {
   type = "builtin",
 
   modules = {
-    [ "lluv.pegasus" ] = "src/lluv/pegasus.lua"
+    [ "lluv.pegasus"      ] = "src/lluv/pegasus.lua",
+    [ "lluv.pegasus.file" ] = "src/lluv/pegasus/file.lua",
   }
 }
