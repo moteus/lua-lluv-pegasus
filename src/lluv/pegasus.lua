@@ -43,6 +43,14 @@ local CoHandler = setmetatable({}, {__index = Handler}) do
 
 function CoHandler:processRequest(port, client)
   local request    = Request:new(port, client)
+
+  -- if we get some invalid request just close it
+  -- do not try handle or response
+  if not request:method() then
+    client:close()
+    return
+  end
+
   local response   = Response:new(client, self)
   response.request = request
 
