@@ -19,7 +19,7 @@ dependencies = {
   "lua >= 5.1, < 5.4",
   "pegasus > 0.9.2",
   "lluv",
-  "path",
+  "lua-path",
 }
 
 build = {
