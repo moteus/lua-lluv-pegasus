@@ -38,6 +38,29 @@ end
 
 end
 
+-- Optimisation for receive line
+if Request._receiveLine and ut.Buffer.read_line_eol then
+
+Request = setmetatable({}, {__index = Request}) do
+
+function Request:_receiveLine()
+  if self._complete.msg then
+    return nil, self._error or 'closed'
+  end
+
+  local line, status, part = self.client:receive('*L')
+
+  if not line and part and #part > 0 then
+    line = part
+  end
+
+  return line, status
+end
+
+end
+
+end
+
 -- Overwrite Handler class to use my `cofs` module
 local CoHandler = setmetatable({}, {__index = Handler}) do
 
