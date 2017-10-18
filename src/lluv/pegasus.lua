@@ -101,7 +101,9 @@ function CoHandler:processRequest(port, client)
 
       if file then
         response:writeFile(file, mimetypes.guess(filename or '') or 'text/html')
-        file:close() -- pegasus 0.9.3 does not close file
+        if file._fd then -- ugly hack
+          file:close() -- pegasus 0.9.3 does not close file
+        end
       else
         response:statusCode(404)
       end
