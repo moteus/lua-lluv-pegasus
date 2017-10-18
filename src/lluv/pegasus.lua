@@ -162,7 +162,10 @@ function Pegasus:startSync(callback)
 end
 
 function Pegasus:start(...)
-  return ut.corun(self.startSync, self, ...)
+  return ut.corun(function(...)
+    local ok, err = self.startSync(self, ...)
+    assert(ok, err and tostring(err))
+  end, ...)
 end
 
 end
