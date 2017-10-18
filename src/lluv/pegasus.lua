@@ -107,6 +107,7 @@ function Pegasus:__init(params)
   self._location = params and params.location or ''
   self._plugins  = params and params.plugins or {}
   self._callback = params and params.callback
+  self._timeout  = params and params.timeout or 1
 
   if #self._location > 0 then
     self._location = File:fullPath(self._location) or ''
@@ -117,6 +118,10 @@ end
 
 -- run from new thread
 local function on_accept(self, client)
+  if self._timeout then
+    client:settimeout(self._timeout)
+  end
+
   local handler = CoHandler:new(self._callback, self._location, self._plugins)
   handler:processRequest(PORT, client:attach())
 end
