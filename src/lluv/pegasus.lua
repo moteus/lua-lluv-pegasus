@@ -147,12 +147,13 @@ local function on_accept(self, client)
     client:settimeout(self._timeout)
   end
 
-  local handler = CoHandler:new(self._callback, self._location, self._plugins)
-  handler:processRequest(PORT, client:attach())
+  self._handler:processRequest(self._port, client:attach())
 end
 
 function Pegasus:startSync(callback)
   self._callback = callback or self._callback
+
+  self._handler = CoHandler:new(self._callback, self._location, self._plugins)
 
   local srv = socket.tcp()
 
