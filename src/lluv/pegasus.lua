@@ -10,7 +10,6 @@
 --
 ------------------------------------------------------------------
 
-local uv        = require 'lluv'
 local ut        = require 'lluv.utils'
 local socket    = require 'lluv.luasocket'
 local File      = require 'lluv.pegasus.file'
@@ -170,7 +169,7 @@ function Pegasus:startSync(callback)
     return nil, port
   end
 
-  print(string.format("%s (%s) is up on %s:%s", 
+  print(string.format("%s (%s) is up on %s:%s",
     _M._NAME, _M._VERSION, tostring(ip), tostring(port)
   ))
 

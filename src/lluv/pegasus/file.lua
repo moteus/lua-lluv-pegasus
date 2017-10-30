@@ -10,8 +10,9 @@
 --
 ------------------------------------------------------------------
 
+-- luacheck: ignore self
+
 local uv   = require 'lluv'
-local ut   = require 'lluv.utils'
 local cofs = require 'lluv.cofs'
 local path = require 'path'
 
