@@ -65,21 +65,18 @@ end
 local CoHandler = setmetatable({}, {__index = Handler}) do
 CoHandler.__index = CoHandler
 
-function CoHandler:processRequest(port, client)
-  local request    = Request:new(port, client)
-
+function Handler:internalProcessRequest(request)
   -- if we get some invalid request just close it
   -- do not try handle or response
   if not request:method() then
-    client:close()
+    request.client:close()
     return
   end
 
-  local response   = Response:new(client, self)
-  response.request = request
+  local response = Response:new(self, request)
 
   local stop = self:pluginsNewRequestResponse(request, response)
-  if stop then return end
+  if stop then return self:requestDone(request, response) end
 
   local path = request:path()
 
@@ -118,9 +115,21 @@ function CoHandler:processRequest(port, client)
     self.callback(request, response)
   end
 
-  if response.status == 404 then
-    response:writeDefaultErrorMessage(404)
+  -- if callback did not send any then we have to send some response
+  if not response.headers_sended then
+    if not response.status then
+      response:statusCode(500)
+    end
+    response:writeDefaultErrorMessage(response.status)
   end
+
+  return self:requestDone(request, response)
+end
+
+function CoHandler:processRequest(port, client)
+  local request = Request:new(port, client)
+
+  return self:internalProcessRequest(request)
 end
 
 end
