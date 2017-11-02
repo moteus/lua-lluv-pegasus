@@ -41,6 +41,7 @@ end
 if Request._receiveLine and ut.Buffer.read_line_eol then
 
 Request = setmetatable({}, {__index = Request}) do
+Request.__index = Request
 
 function Request:_receiveLine()
   if self._complete.msg then
@@ -62,6 +63,7 @@ end
 
 -- Overwrite Handler class to use my `cofs` module
 local CoHandler = setmetatable({}, {__index = Handler}) do
+CoHandler.__index = CoHandler
 
 function CoHandler:processRequest(port, client)
   local request    = Request:new(port, client)
