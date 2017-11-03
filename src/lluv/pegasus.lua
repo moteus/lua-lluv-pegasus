@@ -65,7 +65,7 @@ end
 local CoHandler = setmetatable({}, {__index = Handler}) do
 CoHandler.__index = CoHandler
 
-function Handler:internalProcessRequest(request)
+function CoHandler:internalProcessRequest(request)
   -- if we get some invalid request just close it
   -- do not try handle or response
   if not request:method() then
