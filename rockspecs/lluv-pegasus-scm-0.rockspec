@@ -28,7 +28,8 @@ build = {
   type = "builtin",
 
   modules = {
-    [ "lluv.pegasus"      ] = "src/lluv/pegasus.lua",
-    [ "lluv.pegasus.file" ] = "src/lluv/pegasus/file.lua",
+    [ "lluv.pegasus"           ] = "src/lluv/pegasus.lua",
+    [ "lluv.pegasus.file"      ] = "src/lluv/pegasus/file.lua",
+    [ "lluv.pegasus.keepalive" ] = "src/lluv/pegasus/keepalive.lua",
   }
 }
