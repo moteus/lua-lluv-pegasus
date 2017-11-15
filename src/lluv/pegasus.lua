@@ -115,14 +115,6 @@ function CoHandler:internalProcessRequest(request)
     self.callback(request, response)
   end
 
-  -- if callback did not send any then we have to send some response
-  if not response.headers_sended then
-    if not response.status then
-      response:statusCode(500)
-    end
-    response:writeDefaultErrorMessage(response.status)
-  end
-
   return self:requestDone(request, response)
 end
 
